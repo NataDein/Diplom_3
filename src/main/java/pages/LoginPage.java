@@ -8,17 +8,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-// https://stellarburgers.nomoreparties.site/login
-// Вход
+import java.util.Objects;
 
 public class LoginPage {
     private final WebDriver driver;
+
+    private final String pageRoute = "/login";
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    private final By pageHeaderLocator = By.xpath("");
     private final By emailFieldLocator = By.xpath("");
     private final By passwordFieldLocator = By.xpath("");
 //    input input_type_password [input_status_error]
@@ -51,5 +52,14 @@ public class LoginPage {
             .until(isElementInDOM);
 
         return driver.findElement(errorNotificationLocator).getText();
+    }
+
+    public boolean checkIsPageOpened() {
+        ExpectedCondition<Boolean> isLoginPageOpened = ExpectedConditions.urlMatches(pageRoute + "$");
+
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+            .until(isLoginPageOpened);
+
+        return isLoginPageOpened.apply(driver);
     }
 }

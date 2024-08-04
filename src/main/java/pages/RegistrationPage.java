@@ -8,24 +8,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Objects;
 
-// https://stellarburgers.nomoreparties.site/register
 // Регистрация
 
 public class RegistrationPage {
     private final WebDriver driver;
 
+    private final String pageRoute = "/register";
+
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    private final By nameFieldLocator = By.xpath("");
-    private final By emailFieldLocator = By.xpath("");
-    private final By passwordFieldLocator = By.xpath("");
+    public String getPageRoute() { return this.pageRoute; }
+
+    private final By nameFieldLocator = By.xpath(".//form/.//label[text() = 'Имя']/following::input[1]");
+    private final By emailFieldLocator = By.xpath(".//form/.//label[text() = 'Email']/following::input[1]");
+    private final By passwordFieldLocator = By.xpath(".//form/.//label[text() = 'Пароль']/following::input[1]");
 //    input input_type_password [input_status_error]
     private final By errorNotificationLocator = By.xpath(".//p[contains(@class, 'input__error')]");
 
-    private final By registerButtonLocator = By.xpath("");
+    private final By registerButtonLocator = By.xpath(".//button[text() = 'Зарегистрироваться']");
 
     private final By loginLinkLocator = By.xpath("");
 
@@ -41,12 +45,12 @@ public class RegistrationPage {
 
     public void clickLoginLink() { driver.findElement(loginLinkLocator).click(); }
 
-    public String getErrorNotificationText() {
+    public boolean checkNotificationOfIncorrectPassword() {
         ExpectedCondition<WebElement> isElementInDOM = ExpectedConditions.presenceOfElementLocated(errorNotificationLocator);
 
         new WebDriverWait(driver, Duration.ofSeconds(3))
             .until(isElementInDOM);
 
-        return driver.findElement(errorNotificationLocator).getText();
+        return Objects.equals(driver.findElement(errorNotificationLocator).getText(), "Некорректный пароль");
     }
 }
