@@ -1,11 +1,7 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
-import net.bytebuddy.utility.RandomString;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.openqa.selenium.Keys;
 import pages.LoginPage;
 import pages.RegistrationPage;
 
@@ -17,10 +13,7 @@ public class RegistrationTest extends BaseTest {
 
         goToPage(registrationPage.getPageRoute());
 
-        registrationPage.setName("TestName");
-        registrationPage.setEmail(RandomString.make() + "@test.ru");
-        registrationPage.setPassword("password");
-
+        registrationPage.fillOutRegistrationForm();
         registrationPage.clickRegisterButton();
 
         Assert.assertTrue(

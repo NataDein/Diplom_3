@@ -12,16 +12,10 @@ import java.util.Objects;
 
 // Регистрация
 
-public class RegistrationPage {
-    private final WebDriver driver;
-
-    private final String pageRoute = "/register";
-
+public class RegistrationPage extends PageBase {
     public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver, "/register");
     }
-
-    public String getPageRoute() { return this.pageRoute; }
 
     private final By nameFieldLocator = By.xpath(".//form/.//label[text() = 'Имя']/following::input[1]");
     private final By emailFieldLocator = By.xpath(".//form/.//label[text() = 'Email']/following::input[1]");
@@ -31,7 +25,14 @@ public class RegistrationPage {
 
     private final By registerButtonLocator = By.xpath(".//button[text() = 'Зарегистрироваться']");
 
-    private final By loginLinkLocator = By.xpath("");
+    private final By loginLinkLocator = By.xpath(".//a[text() = 'Войти']");
+
+
+    public void fillOutRegistrationForm() {
+        this.setName("TestName");
+        this.setEmail("test-email@test.ru");
+        this.setPassword("password");
+    }
 
     public void setName(String value) { driver.findElement(nameFieldLocator).sendKeys(value); }
 

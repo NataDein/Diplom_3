@@ -12,16 +12,16 @@ import java.time.Duration;
 // https://stellarburgers.nomoreparties.site/forgot-password
 // Восстановление пароля
 
-public class ForgotPasswordPage {
-    private final WebDriver driver;
-
+public class ForgotPasswordPage extends PageBase {
     public ForgotPasswordPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver, "/forgot-password");
     }
 
-    private final By emailFieldLocator = By.xpath("");
+    private final By emailFieldLocator = By.xpath(".//form/.//label[text() = 'Email']/following::input[1]");
+    private final By recoveryButtonLocator = By.xpath(".//button[text() = 'Восстановить']");
+    private final By loginLinkLocator = By.xpath(".//a[text() = 'Войти']");
 
-    private final By recoveryButtonLocator = By.xpath("");
+
 
     public void setEmail(String value) {
         driver.findElement(emailFieldLocator).sendKeys(value);
@@ -30,4 +30,6 @@ public class ForgotPasswordPage {
     public void clickRecoveryButton() {
         driver.findElement(recoveryButtonLocator).click();
     }
+
+    public void clickLoginLink() { driver.findElement(loginLinkLocator).click(); }
 }

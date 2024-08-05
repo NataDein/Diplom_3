@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.time.Duration;
+
 public class BaseTest {
     public static WebDriver driver;
     public static String YA_BROWSER_PATH;
@@ -15,10 +17,10 @@ public class BaseTest {
 
     @Before
     public void init() {
-        YA_BROWSER_PATH = System.getProperty("YA_BROWSER_PATH");
+        YA_BROWSER_PATH = System.getenv("YA_BROWSER_PATH");
 
         driver = getDriver(
-            System.getProperty("BROWSER")
+            System.getenv("BROWSER")
         );
     }
 
@@ -42,8 +44,8 @@ public class BaseTest {
         driver.get(pageRoute == null ? SITE_URL : SITE_URL + pageRoute);
     }
 
-//    @After
-//    public void tearDown() {
+    @After
+    public void tearDown() {
 //        driver.quit();
-//    }
+    }
 }

@@ -9,25 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-// https://stellarburgers.nomoreparties.site/account
-// class="Account_account__vgk_w"
+// https://stellarburgers.nomoreparties.site/account/profile
 
-public class AccountPage {
-    private final WebDriver driver;
+public class AccountPage extends PageBase {
+    public AccountPage(WebDriver driver) { super(driver, "/account/profile"); }
 
-    public AccountPage(WebDriver driver) { this.driver = driver; }
-
-    private final By exitButtonLocator = By.xpath("");
+    private final By exitButtonLocator = By.xpath(".//button[text() = 'Выход']");
     private final By accountBlockLocator = By.xpath("");
 
     public void clickExitButton() { driver.findElement(exitButtonLocator).click(); }
-
-    public String getErrorNotificationText() {
-        ExpectedCondition<WebElement> isElementInDOM = ExpectedConditions.presenceOfElementLocated(accountBlockLocator);
-
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-            .until(isElementInDOM);
-
-        return driver.findElement(accountBlockLocator).getText();
-    }
 }

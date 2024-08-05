@@ -2,31 +2,38 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import java.util.Objects;
 
 // https://stellarburgers.nomoreparties.site/
-// Соберите бургер
 
-public class ConstructorPage {
-    private final WebDriver driver;
+public class ConstructorPage extends PageBase {
+    public ConstructorPage(WebDriver driver) { super(driver, "/"); }
 
-    public ConstructorPage(WebDriver driver) {
-        this.driver = driver;
+    private final By bunsTabLocator = By.xpath(".//span[text() = 'Булки']");
+    private final By saucesTabLocator = By.xpath(".//span[text() = 'Соусы']");
+    private final By fillingsTabLocator = By.xpath(".//span[text() = 'Начинки']");
+    private final By menuLocator = By.xpath(".//div[contains(@class, 'BurgerIngredients_ingredients__menuContainer')]");
+    private final By tabMenuActiveLocator = By.xpath(".//section[contains(@class, 'BurgerIngredients_ingredients')]/.//div[contains(@class, 'tab_tab_type_current')]");
+
+
+    public void clickBunsTab() {
+        driver.findElement(bunsTabLocator).click();
     }
 
-    private final By pageHaederLocator = By.xpath("");
+    public void clickSaucesTab() { driver.findElement(saucesTabLocator).click(); }
 
-    public String getPageHeaderText() {
-        ExpectedCondition<WebElement> isElementInDOM = ExpectedConditions.presenceOfElementLocated(pageHaederLocator);
+    public void clickFillingsTab() { driver.findElement(fillingsTabLocator).click(); }
 
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-            .until(isElementInDOM);
+    public boolean checkIsBunsTabActive() {
+        return Objects.equals(driver.findElement(tabMenuActiveLocator).getText(), "Булки");
+    }
 
-        return driver.findElement(pageHaederLocator).getText();
+    public boolean checkIsSaucesTabActive() {
+        return Objects.equals(driver.findElement(tabMenuActiveLocator).getText(), "Соусы");
+    }
+
+    public boolean checkIsFillingsTabActive() {
+        return Objects.equals(driver.findElement(tabMenuActiveLocator).getText(), "Начинки");
     }
 }
