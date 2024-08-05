@@ -1,6 +1,5 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
-import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,21 +10,31 @@ import pages.*;
 public class HeaderRoutesTest extends BaseTest {
     private LoginPage loginPage;
     private ConstructorPage constructorPage;
-    private Header header;
     private AccountPage accountPage;
+    private Header header;
 
     @Before
-    public void runBeforeEachTest() {
+    public void login() {
         this.loginPage = new LoginPage(driver);
         this.constructorPage = new ConstructorPage(driver);
         this.accountPage = new AccountPage(driver);
-
         this.header = new Header(driver);
+
+        // Создаём пользователя
+        this.userAPI.createUser(this.testUser);
 
         goToPage(loginPage.getPageRoute());
 
-        loginPage.fillOutLoginForm();
+        loginPage.setEmail(this.testUser.getEmail());
+        loginPage.setPassword(this.testUser.getPassword());
+
         loginPage.clickLoginButton();
+    }
+
+    @After
+    public void cleanData() {
+        // Очищаем данные
+        this.userAPI.deleteUser(this.testUser);
     }
 
 

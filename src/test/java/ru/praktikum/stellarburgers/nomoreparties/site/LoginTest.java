@@ -1,13 +1,11 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
 import io.qameta.allure.Step;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
-
-import java.time.Duration;
 
 
 public class LoginTest extends BaseTest {
@@ -24,11 +22,22 @@ public class LoginTest extends BaseTest {
         this.constructorPage = new ConstructorPage(driver);
         this.forgotPasswordPage = new ForgotPasswordPage(driver);
         this.header = new Header(driver);
+
+        // Создаём пользователя
+        this.userAPI.createUser(this.testUser);
     }
 
-    @Step
+    @After
+    public void cleanData() {
+        // Очищаем данные
+        this.userAPI.deleteUser(this.testUser);
+    }
+
+    @Step("Входим в аккаунт под тестовым пользователем")
     public void login() {
-        loginPage.fillOutLoginForm();
+        loginPage.setEmail(this.testUser.getEmail());
+        loginPage.setPassword(this.testUser.getPassword());
+
         loginPage.clickLoginButton();
 
         Assert.assertTrue(

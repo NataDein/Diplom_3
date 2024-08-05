@@ -24,7 +24,7 @@ public class PageBase {
     public boolean checkIsPageOpened() {
         ExpectedCondition<Boolean> isPageOpened = ExpectedConditions.urlMatches(this.pageRoute + "$");
 
-        new WebDriverWait(driver, Duration.ofSeconds(3))
+        new WebDriverWait(driver, Duration.ofSeconds(5))
             .until(isPageOpened);
 
         return isPageOpened.apply(driver);

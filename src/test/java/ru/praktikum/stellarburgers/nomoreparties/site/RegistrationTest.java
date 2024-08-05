@@ -1,8 +1,6 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
-import net.bytebuddy.utility.RandomString;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import pages.LoginPage;
 import pages.RegistrationPage;
 
@@ -14,15 +12,19 @@ public class RegistrationTest extends BaseTest {
 
         goToPage(registrationPage.getPageRoute());
 
-        registrationPage.setName(RandomString.make());
-        registrationPage.setEmail(RandomString.make() + "@test.ru");
-        registrationPage.setPassword("password");
+        registrationPage.setName(this.testUser.getName());
+        registrationPage.setEmail(this.testUser.getEmail());
+        registrationPage.setPassword(this.testUser.getPassword());
+
         registrationPage.clickRegisterButton();
 
         Assert.assertTrue(
             "Перешли на страницу входа после успешной регистрации",
             loginPage.checkIsPageOpened()
         );
+
+        // Очищаем данные
+        userAPI.deleteUser(this.testUser);
     }
 
     @Test

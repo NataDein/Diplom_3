@@ -1,6 +1,6 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
-import io.qameta.allure.Step;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +18,21 @@ public class LogoutTest extends BaseTest {
         this.loginPage = new LoginPage(driver);
         this.header = new Header(driver);
 
+        // Создаём пользователя
+        this.userAPI.createUser(this.testUser);
+
         goToPage(loginPage.getPageRoute());
 
-        loginPage.fillOutLoginForm();
+        loginPage.setEmail(this.testUser.getEmail());
+        loginPage.setPassword(this.testUser.getPassword());
+
         loginPage.clickLoginButton();
+    }
+
+    @After
+    public void cleanData() {
+        // Очищаем данные
+        this.userAPI.deleteUser(this.testUser);
     }
 
     @Test

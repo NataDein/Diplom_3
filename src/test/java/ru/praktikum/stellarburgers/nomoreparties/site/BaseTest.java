@@ -1,14 +1,14 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import java.time.Duration;
+import ru.praktikum.stellarburgers.nomoreparties.site.api.User;
+import ru.praktikum.stellarburgers.nomoreparties.site.api.UserAPIMethods;
 
 public class BaseTest {
     public static WebDriver driver;
@@ -16,8 +16,13 @@ public class BaseTest {
 
     protected final String SITE_URL = "https://stellarburgers.nomoreparties.site";
 
+    protected final User testUser = new User("test-email@test.ru", "password", "TestName");
+    protected final UserAPIMethods userAPI = new UserAPIMethods();
+
     @Before
     public void init() {
+        RestAssured.baseURI = this.SITE_URL;
+
         YA_BROWSER_PATH = System.getenv("YA_BROWSER_PATH");
 
         driver = getDriver(
