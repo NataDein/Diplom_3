@@ -1,5 +1,6 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
+import net.bytebuddy.utility.RandomString;
 import org.junit.Assert;
 import org.junit.Test;
 import pages.LoginPage;
@@ -13,7 +14,9 @@ public class RegistrationTest extends BaseTest {
 
         goToPage(registrationPage.getPageRoute());
 
-        registrationPage.fillOutRegistrationForm();
+        registrationPage.setName(RandomString.make());
+        registrationPage.setEmail(RandomString.make() + "@test.ru");
+        registrationPage.setPassword("password");
         registrationPage.clickRegisterButton();
 
         Assert.assertTrue(

@@ -30,7 +30,7 @@ public class HeaderRoutesTest extends BaseTest {
 
 
     @Test
-    public void openAccountPageByLinkInHeader() throws InterruptedException {
+    public void openAccountPageByLinkInHeader() {
         header.clickAccountLink();
 
         Assert.assertTrue(

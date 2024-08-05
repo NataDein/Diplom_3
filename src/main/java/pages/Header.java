@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,8 +15,15 @@ public class Header {
     private final By ordersListLinkLocator = By.xpath(".//header/.//a/.//p[text() = 'Лента Заказов']");
 
 
+    @Step("Клик по лого")
     public void clickLogoLink() { driver.findElement(logoLinkLocator).click(); }
+
+    @Step("Клик по ссылке перехода в личный кабинет")
     public void clickAccountLink() { driver.findElement(accountLinkLocator).click(); }
+
+    @Step("Клик по ссылке перехода на экран конструктора")
     public void clickConstructorLink() { driver.findElement(constructorLinkLocator).click(); }
+
+    @Step("Клик по ссылке перехода на экран ленты заказов")
     public void clickOrdersListLink() { driver.findElement(ordersListLinkLocator).click(); }
 }

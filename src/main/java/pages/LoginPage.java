@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,31 +26,29 @@ public class LoginPage extends PageBase {
     private final By forgotPasswordLinkLocator = By.xpath(".//a[text() = 'Восстановить пароль']");
 
 
+    @Step("Заполнение полей формы логина")
     public void fillOutLoginForm() {
         this.setEmail("test-email@test.ru");
         this.setPassword("password");
     }
 
+    @Step("Запись email'а пользователя")
     public void setEmail(String value) {
         driver.findElement(emailFieldLocator).sendKeys(value);
     }
 
+    @Step("Запись пароля пользователя")
     public void setPassword(String value) { driver.findElement(passwordFieldLocator).sendKeys(value); }
 
+    @Step("Отправка данных для логина")
     public void clickLoginButton() {
         driver.findElement(loginButtonLocator).click();
     }
 
+    @Step("Клик по ссылке перехода на экран регистрации")
     public void clickRegisterLink() { driver.findElement(registerLinkLocator).click(); }
 
+    @Step("Клик по ссылке перехода на экран восстановления пароля")
     public void clickForgotPasswordLink() { driver.findElement(forgotPasswordLinkLocator).click(); }
 
-    public String getErrorNotificationText() {
-        ExpectedCondition<WebElement> isElementInDOM = ExpectedConditions.presenceOfElementLocated(errorNotificationLocator);
-
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-            .until(isElementInDOM);
-
-        return driver.findElement(errorNotificationLocator).getText();
-    }
 }

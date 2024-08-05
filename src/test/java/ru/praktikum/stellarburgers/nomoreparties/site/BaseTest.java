@@ -1,5 +1,6 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,12 +41,13 @@ public class BaseTest {
         }
     }
 
+    @Step("Переход на страницу")
     public void goToPage(String pageRoute) {
         driver.get(pageRoute == null ? SITE_URL : SITE_URL + pageRoute);
     }
 
     @After
     public void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 }

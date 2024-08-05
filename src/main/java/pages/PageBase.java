@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -19,6 +20,7 @@ public class PageBase {
 
     public String getPageRoute() { return this.pageRoute; }
 
+    @Step("Проверка открыта ли страница")
     public boolean checkIsPageOpened() {
         ExpectedCondition<Boolean> isPageOpened = ExpectedConditions.urlMatches(this.pageRoute + "$");
 

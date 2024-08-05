@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,13 +24,16 @@ public class ForgotPasswordPage extends PageBase {
 
 
 
+    @Step("Запись email'а пользователя")
     public void setEmail(String value) {
         driver.findElement(emailFieldLocator).sendKeys(value);
     }
 
+    @Step("Клик по кнопке восстановления пароля")
     public void clickRecoveryButton() {
         driver.findElement(recoveryButtonLocator).click();
     }
 
+    @Step("Клик по ссылке на экран входа")
     public void clickLoginLink() { driver.findElement(loginLinkLocator).click(); }
 }
