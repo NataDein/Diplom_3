@@ -12,18 +12,18 @@ import ru.praktikum.stellarburgers.nomoreparties.site.api.UserAPIMethods;
 
 public class BaseTest {
     public static WebDriver driver;
-    public static String YA_BROWSER_PATH;
+    public static String yaBrowserPath;
 
     protected final String SITE_URL = "https://stellarburgers.nomoreparties.site";
 
-    protected final User testUser = new User("test-email@test.ru", "password", "TestName");
-    protected final UserAPIMethods userAPI = new UserAPIMethods();
+    protected final User TEST_USER = new User("test-email@test.ru", "password", "TestName");
+    protected final UserAPIMethods USER_API = new UserAPIMethods();
 
     @Before
     public void init() {
         RestAssured.baseURI = this.SITE_URL;
 
-        YA_BROWSER_PATH = System.getenv("YA_BROWSER_PATH");
+        yaBrowserPath = System.getenv("YA_BROWSER_PATH");
 
         driver = getDriver(
             System.getenv("BROWSER")
@@ -39,7 +39,7 @@ public class BaseTest {
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
                 ChromeOptions options = new ChromeOptions();
 
-                options.setBinary(YA_BROWSER_PATH);
+                options.setBinary(yaBrowserPath);
 
                 return new ChromeDriver(options);
             default: throw new IllegalArgumentException("Unsupported browser type");

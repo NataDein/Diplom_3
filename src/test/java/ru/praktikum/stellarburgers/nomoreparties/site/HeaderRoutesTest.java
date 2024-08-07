@@ -1,5 +1,7 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,12 +23,12 @@ public class HeaderRoutesTest extends BaseTest {
         this.header = new Header(driver);
 
         // Создаём пользователя
-        this.userAPI.createUser(this.testUser);
+        this.USER_API.createUser(this.TEST_USER);
 
         goToPage(loginPage.getPageRoute());
 
-        loginPage.setEmail(this.testUser.getEmail());
-        loginPage.setPassword(this.testUser.getPassword());
+        loginPage.setEmail(this.TEST_USER.getEmail());
+        loginPage.setPassword(this.TEST_USER.getPassword());
 
         loginPage.clickLoginButton();
     }
@@ -34,11 +36,13 @@ public class HeaderRoutesTest extends BaseTest {
     @After
     public void cleanData() {
         // Очищаем данные
-        this.userAPI.deleteUser(this.testUser);
+        this.USER_API.deleteUser(this.TEST_USER);
     }
 
 
     @Test
+    @DisplayName("Open account page by link in header")
+    @Description("Should open account page by link in header")
     public void openAccountPageByLinkInHeader() {
         header.clickAccountLink();
 
@@ -49,6 +53,8 @@ public class HeaderRoutesTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Open constructor page by link in header")
+    @Description("Should open constructor page by link in header")
     public void openConstructorPageByLinkInHeader() {
         goToPage("/account");
 
@@ -61,6 +67,8 @@ public class HeaderRoutesTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Open constructor page by logo in header")
+    @Description("Should open constructor page by logo in header")
     public void openConstructorPageByLogoInHeader() {
         goToPage("/account");
 

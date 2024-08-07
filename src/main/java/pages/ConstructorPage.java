@@ -8,7 +8,7 @@ import java.util.Objects;
 
 // https://stellarburgers.nomoreparties.site/
 
-public class ConstructorPage extends PageBase {
+public class ConstructorPage extends BasePage {
     public ConstructorPage(WebDriver driver) { super(driver, "/"); }
 
     private final By bunsTabLocator = By.xpath(".//span[text() = 'Булки']");

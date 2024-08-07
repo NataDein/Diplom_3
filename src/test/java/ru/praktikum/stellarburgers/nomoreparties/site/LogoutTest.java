@@ -1,5 +1,7 @@
 package ru.praktikum.stellarburgers.nomoreparties.site;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,12 +21,12 @@ public class LogoutTest extends BaseTest {
         this.header = new Header(driver);
 
         // Создаём пользователя
-        this.userAPI.createUser(this.testUser);
+        this.USER_API.createUser(this.TEST_USER);
 
         goToPage(loginPage.getPageRoute());
 
-        loginPage.setEmail(this.testUser.getEmail());
-        loginPage.setPassword(this.testUser.getPassword());
+        loginPage.setEmail(this.TEST_USER.getEmail());
+        loginPage.setPassword(this.TEST_USER.getPassword());
 
         loginPage.clickLoginButton();
     }
@@ -32,10 +34,12 @@ public class LogoutTest extends BaseTest {
     @After
     public void cleanData() {
         // Очищаем данные
-        this.userAPI.deleteUser(this.testUser);
+        this.USER_API.deleteUser(this.TEST_USER);
     }
 
     @Test
+    @DisplayName("Logout by logout link on account page")
+    @Description("Should logout by logout link on account page")
     public void logoutByLogoutLink() {
         header.clickAccountLink();
 

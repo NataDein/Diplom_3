@@ -1,7 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,16 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class PageBase {
+public class BasePage {
     protected final WebDriver driver;
+    @Getter
     private final String pageRoute;
 
-    public PageBase(WebDriver driver, String pageRoute) {
+    public BasePage(WebDriver driver, String pageRoute) {
         this.driver = driver;
         this.pageRoute = pageRoute;
     }
-
-    public String getPageRoute() { return this.pageRoute; }
 
     @Step("Проверка открыта ли страница")
     public boolean checkIsPageOpened() {
