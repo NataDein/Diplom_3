@@ -20,12 +20,12 @@ public class ConstructorRoutesTest extends BaseTest {
         this.constructorPage = new ConstructorPage(driver);
 
         // Создаём пользователя
-        this.USER_API.createUser(this.TEST_USER);
+        this.userApi.createUser(this.testUser);
 
         goToPage(loginPage.getPageRoute());
 
-        loginPage.setEmail(this.TEST_USER.getEmail());
-        loginPage.setPassword(this.TEST_USER.getPassword());
+        loginPage.setEmail(this.testUser.getEmail());
+        loginPage.setPassword(this.testUser.getPassword());
 
         loginPage.clickLoginButton();
 
@@ -35,7 +35,7 @@ public class ConstructorRoutesTest extends BaseTest {
     @After
     public void cleanData() {
         // Очищаем данные
-        this.USER_API.deleteUser(this.TEST_USER);
+        this.userApi.deleteUser(this.testUser);
     }
 
     @Test

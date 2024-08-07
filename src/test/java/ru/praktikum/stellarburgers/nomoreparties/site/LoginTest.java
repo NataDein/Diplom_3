@@ -26,19 +26,19 @@ public class LoginTest extends BaseTest {
         this.header = new Header(driver);
 
         // Создаём пользователя
-        this.USER_API.createUser(this.TEST_USER);
+        this.userApi.createUser(this.testUser);
     }
 
     @After
     public void cleanData() {
         // Очищаем данные
-        this.USER_API.deleteUser(this.TEST_USER);
+        this.userApi.deleteUser(this.testUser);
     }
 
     @Step("Входим в аккаунт под тестовым пользователем")
     public void login() {
-        loginPage.setEmail(this.TEST_USER.getEmail());
-        loginPage.setPassword(this.TEST_USER.getPassword());
+        loginPage.setEmail(this.testUser.getEmail());
+        loginPage.setPassword(this.testUser.getPassword());
 
         loginPage.clickLoginButton();
 

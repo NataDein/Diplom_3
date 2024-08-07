@@ -16,9 +16,9 @@ public class RegistrationTest extends BaseTest {
 
         goToPage(registrationPage.getPageRoute());
 
-        registrationPage.setName(this.TEST_USER.getName());
-        registrationPage.setEmail(this.TEST_USER.getEmail());
-        registrationPage.setPassword(this.TEST_USER.getPassword());
+        registrationPage.setName(this.testUser.getName());
+        registrationPage.setEmail(this.testUser.getEmail());
+        registrationPage.setPassword(this.testUser.getPassword());
 
         registrationPage.clickRegisterButton();
 
@@ -28,7 +28,7 @@ public class RegistrationTest extends BaseTest {
         );
 
         // Очищаем данные
-        USER_API.deleteUser(this.TEST_USER);
+        userApi.deleteUser(this.testUser);
     }
 
     @Test

@@ -11,17 +11,17 @@ import ru.praktikum.stellarburgers.nomoreparties.site.api.User;
 import ru.praktikum.stellarburgers.nomoreparties.site.api.UserAPIMethods;
 
 public class BaseTest {
-    public static WebDriver driver;
-    public static String yaBrowserPath;
+    protected WebDriver driver;
+    private String yaBrowserPath;
 
-    protected final String SITE_URL = "https://stellarburgers.nomoreparties.site";
+    private final String siteUrl = "https://stellarburgers.nomoreparties.site";
 
-    protected final User TEST_USER = new User("test-email@test.ru", "password", "TestName");
-    protected final UserAPIMethods USER_API = new UserAPIMethods();
+    protected final User testUser = new User("test-email@test.ru", "password", "TestName");
+    protected final UserAPIMethods userApi = new UserAPIMethods();
 
     @Before
     public void init() {
-        RestAssured.baseURI = this.SITE_URL;
+        RestAssured.baseURI = this.siteUrl;
 
         yaBrowserPath = System.getenv("YA_BROWSER_PATH");
 
@@ -48,7 +48,7 @@ public class BaseTest {
 
     @Step("Переход на страницу")
     public void goToPage(String pageRoute) {
-        driver.get(pageRoute == null ? SITE_URL : SITE_URL + pageRoute);
+        driver.get(pageRoute == null ? siteUrl : siteUrl + pageRoute);
     }
 
     @After
