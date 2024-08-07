@@ -3,6 +3,10 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Header {
     private final WebDriver driver;
@@ -19,7 +23,12 @@ public class Header {
     public void clickLogoLink() { driver.findElement(logoLinkLocator).click(); }
 
     @Step("Клик по ссылке перехода в личный кабинет")
-    public void clickAccountLink() { driver.findElement(accountLinkLocator).click(); }
+    public void clickAccountLink() {
+        // NOTE: Часто кликает по ссылке аккаунта раньше, чем та прогрузится и будет доступна для взаимодействия
+        (new WebDriverWait(driver, Duration.ofSeconds(5)))
+            .until(ExpectedConditions.elementToBeClickable(driver.findElement(accountLinkLocator)))
+            .click();
+    }
 
     @Step("Клик по ссылке перехода на экран конструктора")
     public void clickConstructorLink() { driver.findElement(constructorLinkLocator).click(); }
